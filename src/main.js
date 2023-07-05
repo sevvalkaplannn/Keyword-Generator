@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import VueClipboard from 'vue-clipboard2';
 import TheHeader from './components/TheHeader.vue';
+
 import TheNav from './components/TheNav.vue';
 import FontAwesomeIcon from './fontAwesome';
 

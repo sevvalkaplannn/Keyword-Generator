@@ -63,9 +63,9 @@ export default {
       selectedKeywords: [],
       unwantedWords: ["is", "a", "an", "the"],
       nGramOptions: Array.from({ length: 10 }, (_, i) => ({
-      label: `${i + 1}-gram`,
-      value: i + 1
-    }))
+        label: `${i + 1}-gram`,
+        value: i + 1,
+      })),
     };
   },
   computed: {
@@ -73,9 +73,10 @@ export default {
       return this.inputText.replace(/[^a-zA-Z0-9\s]/g, "").toLowerCase();
     },
     filteredText() {
-    return this.cleanedText.split(" ")
-      .filter((word) => !this.unwantedWords.includes(word))
-      .join(" ");
+      return this.cleanedText
+        .split(" ")
+        .filter((word) => !this.unwantedWords.includes(word))
+        .join(" ");
     },
   },
   methods: {
@@ -105,8 +106,8 @@ export default {
       );
     },
     removeKeyword(keyword, groupIndex, keywordIndex) {
-  this.selectedKeywords[groupIndex].splice(keywordIndex, 1);
-   },
+      this.selectedKeywords[groupIndex].splice(keywordIndex, 1);
+    },
   },
 };
 </script>

@@ -62,18 +62,20 @@ export default {
       selectedNGrams: [],
       selectedKeywords: [],
       unwantedWords: ["is", "a", "an", "the"],
+      nGramOptions: Array.from({ length: 10 }, (_, i) => ({
+      label: `${i + 1}-gram`,
+      value: i + 1
+    }))
     };
   },
   computed: {
     cleanedText() {
       return this.inputText.replace(/[^a-zA-Z0-9\s]/g, "").toLowerCase();
     },
-    nGramOptions() {
-      const options = [];
-      for (let n = 1; n <= 10; n++) {
-        options.push({ label: `${n}-gram`, value: n });
-      }
-      return options;
+    filteredText() {
+    return this.cleanedText.split(" ")
+      .filter((word) => !this.unwantedWords.includes(word))
+      .join(" ");
     },
   },
   methods: {
@@ -102,15 +104,9 @@ export default {
         this.getNGramKeywords(n, filteredText)
       );
     },
-    removeKeyword(keyword) {
-      for (let i = 0; i < this.selectedKeywords.length; i++) {
-        const index = this.selectedKeywords[i].indexOf(keyword);
-        if (index !== -1) {
-          this.selectedKeywords[i].splice(index, 1);
-          break;
-        }
-      }
-    },
+    removeKeyword(keyword, groupIndex, keywordIndex) {
+  this.selectedKeywords[groupIndex].splice(keywordIndex, 1);
+   },
   },
 };
 </script>

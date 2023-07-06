@@ -44,7 +44,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { Select, Button, Input, Tag, Icon } from "ant-design-vue";
 
@@ -62,7 +61,7 @@ export default {
       inputText: "",
       selectedNGrams: [],
       selectedKeywords: [],
-
+      unwantedWords: ["is", "a", "an", "the"],
     };
   },
   computed: {
@@ -78,28 +77,31 @@ export default {
     },
   },
   methods: {
-    getNGramKeywords(n) {
-  const words = this.cleanedText.split(/\s+/);
-  const nGrams = [];
+    getNGramKeywords(n, text) {
+      const words = text.split(/\s+/);
+      const nGrams = [];
 
-  for (let i = 0; i <= words.length - n; i++) {
-    const nGram = words.slice(i, i + n).join(" ");
-    nGrams.push(nGram);
-  }
+      for (let i = 0; i <= words.length - n; i++) {
+        const nGram = words.slice(i, i + n).join(" ");
+        if (!nGrams.includes(nGram)) {
+          nGrams.push(nGram);
+        }
+      }
 
-  return nGrams;
-},
+      return nGrams;
+    },
 
-    unwantedWord(word) {
-    const unwantedWords = ["is", "a", "an", "the"];
-    return unwantedWords.includes(word.toLowerCase());
-  },
+    generateKeywords() {
+      const cleanedText = this.cleanedText;
+      const filteredText = cleanedText
+        .split(" ")
+        .filter((word) => !this.unwantedWords.includes(word))
+        .join(" ");
 
-  generateKeywords() {
-    this.selectedKeywords = this.selectedNGrams.map((n) =>
-      this.getNGramKeywords(n)
-    );
-  },
+      this.selectedKeywords = this.selectedNGrams.map((n) =>
+        this.getNGramKeywords(n, filteredText)
+      );
+    },
     removeKeyword(keyword) {
       for (let i = 0; i < this.selectedKeywords.length; i++) {
         const index = this.selectedKeywords[i].indexOf(keyword);

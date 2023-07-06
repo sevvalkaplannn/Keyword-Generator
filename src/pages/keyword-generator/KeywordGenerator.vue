@@ -34,9 +34,9 @@
             class="ma-keyword-group"
           >
             <h3>{{ selectedNGrams[index] }}-gram Keywords:</h3>
-            <a-tag v-for="keyword in keywords" :key="keyword" class="ma-keyword-tag">
+            <a-tag v-for="(keyword, keywordIndex) in keywords" :key="keyword" class="ma-keyword-tag">
               {{ keyword }}
-              <a-icon type="close" @click="removeKeyword(keyword)" />
+              <a-icon type="close" @click="removeKeyword(index,keywordIndex)" />
             </a-tag>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default {
         this.getNGramKeywords(n, filteredText)
       );
     },
-    removeKeyword(keyword, groupIndex, keywordIndex) {
+    removeKeyword(groupIndex, keywordIndex) {
       this.selectedKeywords[groupIndex].splice(keywordIndex, 1);
     },
   },

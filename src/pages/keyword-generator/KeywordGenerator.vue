@@ -62,7 +62,7 @@ export default {
       inputText: "",
       selectedNGrams: [],
       selectedKeywords: [],
-      unwantedWords: ["is", "a", "an", "the"],
+
     };
   },
   computed: {
@@ -79,35 +79,27 @@ export default {
   },
   methods: {
     getNGramKeywords(n) {
-      const words = this.cleanedText.trim().split(" ");
-      const nGram = [];
-      const generatedNGrams = [];
+  const words = this.cleanedText.split(/\s+/);
+  const nGrams = [];
 
-      for (let i = 0; i < words.length - n + 1; i++) {
-        const generatedNGram = words.slice(i, i + n).join(" ");
-        const isUnwantedWord = generatedNGram
-          .split(" ")
-          .some((word) => this.unwantedWord(word));
+  for (let i = 0; i <= words.length - n; i++) {
+    const nGram = words.slice(i, i + n).join(" ");
+    nGrams.push(nGram);
+  }
 
-        if (isUnwantedWord) {
-          continue;
-        }
+  return nGrams;
+},
 
-        if (!generatedNGrams.includes(generatedNGram)) {
-          nGram.push(generatedNGram);
-          generatedNGrams.push(generatedNGram);
-        }
-      }
-
-      return nGram;
-    },
     unwantedWord(word) {
-      const unwantedWords = ["is", "a", "an", "the"];
-      return unwantedWords.includes(word);
-    },
-    generateKeywords() {
-      this.selectedKeywords = this.selectedNGrams.map((n) => this.getNGramKeywords(n));
-    },
+    const unwantedWords = ["is", "a", "an", "the"];
+    return unwantedWords.includes(word.toLowerCase());
+  },
+
+  generateKeywords() {
+    this.selectedKeywords = this.selectedNGrams.map((n) =>
+      this.getNGramKeywords(n)
+    );
+  },
     removeKeyword(keyword) {
       for (let i = 0; i < this.selectedKeywords.length; i++) {
         const index = this.selectedKeywords[i].indexOf(keyword);

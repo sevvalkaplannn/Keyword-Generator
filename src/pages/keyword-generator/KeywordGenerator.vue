@@ -34,9 +34,8 @@
             class="ma-keyword-group"
           >
             <h3>{{ selectedNGrams[index] }}-gram Keywords:</h3>
-            <a-tag v-for="(keyword, keywordIndex) in keywords" :key="keyword" class="ma-keyword-tag">
+            <a-tag v-for="keyword in keywords" :key="keyword" class="ma-keyword-tag">
               {{ keyword }}
-              <a-icon type="close" @click="removeKeyword(index,keywordIndex)" />
             </a-tag>
           </div>
         </div>
@@ -44,8 +43,10 @@
     </div>
   </div>
 </template>
+
 <script>
-import { Select, Button, Input, Tag, Icon } from "ant-design-vue";
+import { Select, Button, Input, Tag } from "ant-design-vue";
+import { regex, splitRegex, filterArr } from "./cleanupResources";
 
 export default {
   name: "ma-keyword-generator",
@@ -54,29 +55,31 @@ export default {
     "a-button": Button,
     "a-textarea": Input.TextArea,
     "a-tag": Tag,
-    "a-icon": Icon,
   },
   data() {
     return {
       inputText: "",
       selectedNGrams: [],
       selectedKeywords: [],
-      unwantedWords: ["is", "a", "an", "the"],
       nGramOptions: Array.from({ length: 10 }, (_, i) => ({
         label: `${i + 1}-gram`,
         value: i + 1,
       })),
     };
   },
+  
   computed: {
     cleanedText() {
-      return this.inputText.replace(/[^a-zA-Z0-9\s]/g, "").toLowerCase();
+      return this.inputText
+        .replace(regex, "")
+        .split(splitRegex)
+        .map((word) => word.trim())
+        .filter((word) => word.length > 0)
+        .join(" ")
+        .toLowerCase();
     },
     filteredText() {
-      return this.cleanedText
-        .split(" ")
-        .filter((word) => !this.unwantedWords.includes(word))
-        .join(" ");
+      return this.cleanedText.split(" ").join(" ");
     },
   },
   methods: {
@@ -98,13 +101,14 @@ export default {
       const cleanedText = this.cleanedText;
       const filteredText = cleanedText
         .split(" ")
-        .filter((word) => !this.unwantedWords.includes(word))
+        .filter((word) => !filterArr.includes(word))
         .join(" ");
 
       this.selectedKeywords = this.selectedNGrams.map((n) =>
         this.getNGramKeywords(n, filteredText)
       );
     },
+
     removeKeyword(groupIndex, keywordIndex) {
       this.selectedKeywords[groupIndex].splice(keywordIndex, 1);
     },
@@ -114,72 +118,54 @@ export default {
 
 <style scoped>
 .ma-keywords-generator {
-  font-family: Arial, sans-serif;
-  max-width: 1000px;
-  margin: 0 auto;
+  @apply font-sans max-w-5xl m-auto;
 }
 
 .ma-content {
-  display: flex;
+  @apply flex;
 }
 
 .ma-left-side {
-  flex: 1;
-  padding-right: 100px;
+  @apply flex-1 pr-24;
 }
 
 .ma-right-side {
-  flex: 1;
-  padding-left: 100px;
+  @apply flex-1 pl-24;
 }
 
 .ma-header {
-  background-color: white;
-  text-align: center;
+  @apply bg-white text-center;
 }
 
 .ma-input {
-  margin-bottom: 20px;
+  @apply mb-5;
 }
 
 .ma-input label {
-  display: block;
-  margin-bottom: 15px;
-  font-size: 15px;
-  font-weight: 200;
-  color: black;
+  @apply block mb-4 text-sm font-extralight text-black;
 }
 
 .ma-input textarea {
-  width: 100%;
-  resize: vertical;
-  background-color: white;
+  @apply w-full resize-y bg-white;
 }
 
 .ma-button {
-  margin-top: 20px;
+  @apply mt-5;
 }
 
 .convertButton {
-  background-color: brown;
-  border-color: brown;
-  color: white;
-  border-radius: 8px;
-  height: 30px;
+  @apply bg-red-900 border-red-900 text-white rounded-lg h-8;
 }
 
 .ma-keyword-group {
-  margin-bottom: 20px;
+  @apply mt-5;
 }
 
 .ma-keyword-group h3 {
-  margin-top: 0;
-  font-size: 15px;
-  font-weight: 200;
+  @apply mt-0 text-sm font-extralight;
 }
 
 .ma-keyword-group a-tag {
-  margin-right: 5px;
-  margin-bottom: 5px;
+  @apply mr-1 mb-1;
 }
 </style>

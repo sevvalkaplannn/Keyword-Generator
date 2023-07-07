@@ -101,7 +101,7 @@ export default {
       const cleanedText = this.cleanedText;
       const filteredText = cleanedText
         .split(" ")
-        .filter((word) => !this.filterArr.includes(word))
+        .filter((word) => !filterArr.includes(word))
         .join(" ");
 
       this.selectedKeywords = this.selectedNGrams.map((n) =>

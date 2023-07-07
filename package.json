@@ -2,6 +2,9 @@
   "name": "ma_conf",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "last 2 years"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "NODE_ENV=production vue-cli-service build",
@@ -23,13 +26,17 @@
     "@vue/cli-plugin-babel": "^5.0.0-beta.2",
     "@vue/cli-plugin-eslint": "^5.0.0-beta.2",
     "@vue/cli-service": "^5.0.0-beta.2",
-    "autoprefixer": "^10.2.6",
+    "autoprefixer": "^10.4.0",
     "babel-eslint": "^10.1.0",
     "cache-loader": "^4.1.0",
     "core-js": "^3.6.5",
     "eslint": "^7.29.0",
     "eslint-plugin-vue": "^7.11.1",
     "google-fonts-webpack-plugin": "^0.4.4",
+    "postcss": "^8.4.5",
+    "postcss-import": "^15.1.0",
+    "postcss-nested": "^6.0.1",
+    "tailwindcss": "^2.2.19",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.1",
     "vue-router": "^3.5.2",

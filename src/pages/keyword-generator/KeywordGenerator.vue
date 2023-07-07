@@ -34,9 +34,13 @@
             class="ma-keyword-group"
           >
             <h3>{{ selectedNGrams[index] }}-gram Keywords:</h3>
-            <a-tag v-for="(keyword, keywordIndex) in keywords" :key="keyword" class="ma-keyword-tag">
+            <a-tag
+              v-for="(keyword, keywordIndex) in keywords"
+              :key="keyword"
+              class="ma-keyword-tag"
+            >
               {{ keyword }}
-              <a-icon type="close" @click="removeKeyword(index,keywordIndex)" />
+              <a-icon type="close" @click="removeKeyword(index, keywordIndex)" />
             </a-tag>
           </div>
         </div>
@@ -114,13 +118,11 @@ export default {
 
 <style scoped>
 .ma-keywords-generator {
-  font-family: Arial, sans-serif;
-  max-width: 1000px;
-  margin: 0 auto;
+  @apply font-sans max-w-5xl m-auto;
 }
 
 .ma-content {
-  display: flex;
+  @apply flex;
 }
 
 .ma-left-side {

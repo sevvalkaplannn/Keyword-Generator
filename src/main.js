@@ -8,7 +8,7 @@ import TheNav from './components/TheNav.vue';
 import FontAwesomeIcon from './fontAwesome';
 
 import 'ant-design-vue/dist/antd.css';
-
+import './style.css';
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('the-header', TheHeader);

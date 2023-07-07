@@ -68,6 +68,7 @@ export default {
       })),
     };
   },
+  
   computed: {
     cleanedText() {
       return this.inputText

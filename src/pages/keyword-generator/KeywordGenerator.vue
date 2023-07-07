@@ -61,7 +61,6 @@ export default {
       inputText: "",
       selectedNGrams: [],
       selectedKeywords: [],
-      filterArr,
       nGramOptions: Array.from({ length: 10 }, (_, i) => ({
         label: `${i + 1}-gram`,
         value: i + 1,

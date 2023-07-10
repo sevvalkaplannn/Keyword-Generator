@@ -3,6 +3,8 @@ import App from './App.vue';
 import router from './router';
 import VueClipboard from 'vue-clipboard2';
 import TheHeader from './components/TheHeader.vue';
+import KeywordText from './components/KeywordText.vue';
+import KeywordTable from './components/KeywordTable.vue';
 
 import TheNav from './components/TheNav.vue';
 import FontAwesomeIcon from './fontAwesome';
@@ -13,6 +15,8 @@ import './style.css';
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('the-header', TheHeader);
 Vue.component('the-nav', TheNav);
+Vue.component('the-text', KeywordText);
+Vue.component('the-table', KeywordTable);
 
 Vue.use(VueClipboard);
 

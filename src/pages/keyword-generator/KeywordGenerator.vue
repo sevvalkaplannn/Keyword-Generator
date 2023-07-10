@@ -46,7 +46,7 @@
 
 <script>
 import { Select, Button, Input, Tag } from "ant-design-vue";
-import { regex, splitRegex, filterArr } from "./cleanupResources";
+import { regex, splitRegex, filterArr } from "../cleanupResources";
 
 export default {
   name: "ma-keyword-generator",

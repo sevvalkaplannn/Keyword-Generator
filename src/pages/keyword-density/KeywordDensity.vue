@@ -18,8 +18,8 @@ import KeywordTable from "../../components/KeywordTable.vue";
 
 export default {
   components: {
-    ARow: Row,
-    ACol: Col,
+    "a-row": Row,
+    "a-col": Col,
     KeywordText,
     KeywordTable,
   },
@@ -36,3 +36,6 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+</style>

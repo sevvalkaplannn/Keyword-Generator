@@ -5,7 +5,7 @@
         <a-textarea v-model="userInput" placeholder="Enter text" />
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit">Submit</a-button>
+        <a-button type="primary" html-type="submit" class="convertButton">Count</a-button>
       </a-form-item>
     </a-form>
   </div>
@@ -13,7 +13,6 @@
 
 <script>
 import { Form, Input, Button } from "ant-design-vue";
-
 
 export default {
   components: {
@@ -40,3 +39,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.convertButton {
+  @apply bg-red-900 border-red-900 text-white rounded-lg h-8;
+}
+
+
+</style>

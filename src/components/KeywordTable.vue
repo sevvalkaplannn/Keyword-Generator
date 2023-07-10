@@ -13,7 +13,7 @@ import { Table } from "ant-design-vue";
 
 export default {
   components: {
-    ATable: Table,
+    "a-table": Table,
   },
   props: ["text"],
   data() {
@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     countKeywords(words) {
+      //this method takes an array as inputs (words) and it stores each keyword in keywordCountMap if the word exist it increments the count of that keyword by one
       const keywordCountMap = {};
 
       words.forEach((word) => {
@@ -60,9 +61,11 @@ export default {
       return keywordCountMap;
     },
     calculateDensity(count, totalCount) {
+      //toFixed(1) is used for rounding the result to one decimal place
       return ((count / totalCount) * 100).toFixed(1);
     },
     mergeKeywords(keywordCountMap) {
+      //it combines keywords with the same count and density values into a single row.
       const mergedKeywords = {};
 
       for (const keyword in keywordCountMap) {
@@ -81,12 +84,14 @@ export default {
       return mergedKeywords;
     },
     updateTable(text) {
+      //it works for updating the table for new inputs and all methods are collecting together in this method
       const words = text.toLowerCase().split(" ");
       this.totalCount = words.length;
 
       const keywordCountMap = this.countKeywords(words);
       const mergedKeywords = this.mergeKeywords(keywordCountMap);
 
+      //it will hold the final data
       const keywordData = [];
 
       for (const key in mergedKeywords) {
@@ -106,3 +111,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+:deep .ant-table-thead > tr > th {
+  @apply bg-blue-700 text-white;
+}
+</style>

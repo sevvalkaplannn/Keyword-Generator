@@ -1,20 +1,28 @@
 <template>
-  <div>
+  <div class="ma-table">
     <a-table
       :columns="columns"
       :dataSource="dataSource"
       :rowClassName="getRowClassName"
     />
+    <a-button
+      @click="copyToClipboard"
+      type="primary"
+      html-type="submit"
+      class="convertButton"
+      >Copy to Clipboard</a-button
+    >
   </div>
 </template>
 
 <script>
-import { Table } from "ant-design-vue";
+import { Button, Table } from "ant-design-vue";
 import { regex, splitRegex, filterArr } from "../pages/cleanupResources";
 
 export default {
   components: {
     "a-table": Table,
+    "a-button": Button,
   },
   props: ["text"],
   data() {
@@ -111,11 +119,15 @@ export default {
         );
 
         if (keywords.length > 0 && !isNaN(count) && !isNaN(density)) {
+          const densityValue =
+            keywords.length === 1
+              ? density
+              : this.calculateDensity(parseInt(count), this.totalCount);
           keywordData.push({
-            key: keywords.join(", "),
-            keyword: keywords.join(", "),
+            key: keywords.join(" - "),
+            keyword: keywords.join(" - "),
             count: parseInt(count),
-            density: density,
+            density: densityValue,
           });
         }
       }
@@ -126,6 +138,17 @@ export default {
       //I didn't use record so I add _ as placeholder because there is no specific data that I want to keep
       return index % 2 === 0 ? "default-row" : "gray-row";
     },
+    copyToClipboard() {
+      const csvData =
+        "Keywords,Count,Density\n" +
+        this.dataSource
+          .map((row) => {
+            const keywords = row.key.split(", ").join(" - ");
+            return `${keywords},${row.count},${row.density}`;
+          })
+          .join("\n");
+      navigator.clipboard.writeText(csvData);
+    },
   },
 };
 </script>
@@ -134,12 +157,18 @@ export default {
 :deep .ant-table-thead > tr > th {
   @apply bg-blue-700 text-white;
 }
-
+:deep .ant-btn-primary {
+  @apply bg-blue-700 border-blue-700;
+}
 :deep .default-row {
   @apply bg-white;
 }
 
 :deep .gray-row {
   @apply bg-gray-100;
+}
+
+.ma-table {
+  @apply w-11/12;
 }
 </style>

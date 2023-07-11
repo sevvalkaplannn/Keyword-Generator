@@ -3,7 +3,6 @@
     <a-table
       :columns="columns"
       :dataSource="dataSource"
-
       :rowClassName="getRowClassName"
     />
   </div>
@@ -11,6 +10,7 @@
 
 <script>
 import { Table } from "ant-design-vue";
+import { regex, splitRegex, filterArr } from "../pages/cleanupResources";
 
 export default {
   components: {
@@ -53,7 +53,7 @@ export default {
       const keywordCountMap = {};
 
       words.forEach((word) => {
-        if (!keywordCountMap[word]) {
+        if (!keywordCountMap[word] && !filterArr.includes(word)) {
           keywordCountMap[word] = 0;
         }
         keywordCountMap[word]++;
@@ -86,7 +86,16 @@ export default {
     },
     updateTable(text) {
       //it works for updating the table for new inputs and all methods are collecting together in this method
-      const words = text.toLowerCase().split(" ");
+      const cleanedText = text
+        .toLowerCase()
+        .replace(regex, "")
+        .split(splitRegex)
+        .map((word) => word.trim())
+        .filter((word) => word.length > 0)
+        .filter((word) => !filterArr.includes(word))
+        .join(" ");
+
+      const words = cleanedText.split(" ");
       this.totalCount = words.length;
 
       const keywordCountMap = this.countKeywords(words);
@@ -97,20 +106,24 @@ export default {
 
       for (const key in mergedKeywords) {
         const [count, density] = key.split("-");
-        const keywords = mergedKeywords[key];
+        const keywords = mergedKeywords[key].filter(
+          (keyword) => !filterArr.includes(keyword)
+        );
 
-        keywordData.push({
-          key: keywords.join(", "),
-          keyword: keywords.join(", "),
-          count: parseInt(count),
-          density: density,
-        });
+        if (keywords.length > 0 && !isNaN(count) && !isNaN(density)) {
+          keywordData.push({
+            key: keywords.join(", "),
+            keyword: keywords.join(", "),
+            count: parseInt(count),
+            density: density,
+          });
+        }
       }
 
       this.dataSource = keywordData;
     },
-    getRowClassName(_,index) {
-      //I didn't use record so I add _ as placeholder because there is no specific data that I want to keep 
+    getRowClassName(_, index) {
+      //I didn't use record so I add _ as placeholder because there is no specific data that I want to keep
       return index % 2 === 0 ? "default-row" : "gray-row";
     },
   },

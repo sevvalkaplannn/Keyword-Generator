@@ -45,5 +45,7 @@ export default {
   @apply bg-red-900 border-red-900 text-white rounded-lg h-8;
 }
 
-
+:deep textarea.ant-input {
+  @apply h-52 min-h-0;
+}
 </style>

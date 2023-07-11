@@ -3,7 +3,8 @@
     <a-table
       :columns="columns"
       :dataSource="dataSource"
-      :rowKey="(record) => record.keyword"
+
+      :rowClassName="getRowClassName"
     />
   </div>
 </template>
@@ -108,6 +109,10 @@ export default {
 
       this.dataSource = keywordData;
     },
+    getRowClassName(_,index) {
+      //I didn't use record so I add _ as placeholder because there is no specific data that I want to keep 
+      return index % 2 === 0 ? "default-row" : "gray-row";
+    },
   },
 };
 </script>
@@ -115,5 +120,13 @@ export default {
 <style scoped>
 :deep .ant-table-thead > tr > th {
   @apply bg-blue-700 text-white;
+}
+
+:deep .default-row {
+  @apply bg-white;
+}
+
+:deep .gray-row {
+  @apply bg-gray-100;
 }
 </style>

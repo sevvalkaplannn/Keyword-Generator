@@ -60,15 +60,15 @@ export default {
 
 <style scoped>
 .convertButton {
-  @apply left-20 relative bg-yellow-500 border-yellow-500 text-white rounded-lg h-8;
+  @apply absolute left-4 lg:left-20 lg:relative bg-yellow-500 border-yellow-500 text-white rounded-lg lg:h-8 md:absolute md:left-10 sm:left-10;
 }
 :deep .ant-btn-primary:hover {
   @apply bg-yellow-400 border-yellow-400;
 }
 :deep textarea.ant-input {
-  @apply relative h-56 min-h-0 w-10/12 left-20;
+  @apply w-96 left-24 lg:relative lg:h-56 lg:min-h-0 lg:w-10/12 lg:left-20 md:left-8 md:h-44 sm:left-8 h-44;
 }
 .characterCount {
-  @apply absolute text-sm text-gray-500;
+  @apply absolute left-28 lg:absolute text-sm text-gray-500 md:text-xs md:absolute md:left-3 sm:absolute sm:text-xs;
 }
 </style>

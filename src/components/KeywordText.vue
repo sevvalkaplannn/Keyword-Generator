@@ -12,7 +12,9 @@
             >
           </a-col>
           <a-col :span="6">
-            <span class="ma-character-counter">Total Characters: {{ userInput.length }}</span>
+            <span class="ma-character-counter"
+              >Total Characters: {{ userInput.length }}</span
+            >
           </a-col>
         </a-row>
       </a-form-item>
@@ -37,7 +39,7 @@ export default {
     initialText: {
       type: String,
       required: true,
-    }
+    },
   },
 
   data() {

@@ -5,10 +5,7 @@
       :dataSource="dataSource"
       :rowClassName="getRowClassName"
     />
-    <a-button
-      @click="copyToClipboard"
-      type="primary"
-      html-type="submit"
+    <a-button @click="copyToClipboard" type="primary" html-type="submit"
       >Copy to Clipboard</a-button
     >
   </div>
@@ -28,7 +25,7 @@ export default {
     text: {
       type: String,
       required: true,
-    }
+    },
   },
   data() {
     return {
@@ -98,8 +95,17 @@ export default {
       return mergedKeywords;
     },
     updateTable(text) {
-      //it works for updating the table for new inputs and all methods are collecting together in this method
-      const cleanedText = text
+      const cleanedText = this.cleanText(text);
+      const words = this.getWords(cleanedText);
+      this.totalCount = words.length;
+      const keywordCountMap = this.countKeywords(words);
+      const mergedKeywords = this.mergeKeywords(keywordCountMap);
+      const keywordData = this.generateKeywordData(mergedKeywords);
+      this.dataSource = keywordData;
+    },
+    cleanText(text) {
+      //It cleans the regexs and unwanted words
+      return text
         .toLowerCase()
         .replace(regex, "")
         .split(splitRegex)
@@ -107,14 +113,12 @@ export default {
         .filter((word) => word.length > 0)
         .filter((word) => !filterArr.includes(word))
         .join(" ");
-
-      const words = cleanedText.split(" ");
-      this.totalCount = words.length;
-
-      const keywordCountMap = this.countKeywords(words);
-      const mergedKeywords = this.mergeKeywords(keywordCountMap);
-
-      //it will hold the final data
+    },
+    getWords(cleanedText) {
+      //getwords one by one
+      return cleanedText.split(" ");
+    },
+    generateKeywordData(mergedKeywords) {
       const keywordData = [];
 
       for (const key in mergedKeywords) {
@@ -137,8 +141,9 @@ export default {
         }
       }
 
-      this.dataSource = keywordData;
+      return keywordData;
     },
+
     getRowClassName(_, index) {
       //I didn't use record so I add _ as placeholder because there is no specific data that I want to keep
       return index % 2 === 0 ? "ma-default-row" : "ma-gray-row";

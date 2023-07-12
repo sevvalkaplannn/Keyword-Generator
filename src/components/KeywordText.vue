@@ -60,7 +60,16 @@ export default {
   methods: {
     submitForm(event) {
       event.preventDefault();
-      this.$emit("update-text", this.userInput);
+      if(this.characterCount>1){
+        this.$emit("update-text", this.userInput);
+      }
+      else if(this.characterCount==1){
+        alert("Please write a word!")
+      }
+      else{
+        alert("Please write your text! The textbox is empty!")
+      }
+      
     },
   },
 };

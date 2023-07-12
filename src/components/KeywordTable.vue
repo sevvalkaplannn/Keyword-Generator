@@ -135,7 +135,7 @@ export default {
     },
     getRowClassName(_, index) {
       //I didn't use record so I add _ as placeholder because there is no specific data that I want to keep
-      return index % 2 === 0 ? "default-row" : "gray-row";
+      return index % 2 === 0 ? "ma-default-row" : "ma-gray-row";
     },
     copyToClipboard() {
       const csvData =
@@ -159,11 +159,11 @@ export default {
 :deep .ant-btn-primary {
   @apply bg-blue-700 border-blue-700 md:absolute md:bottom-4;
 }
-:deep .default-row {
+:deep .ma-default-row {
   @apply bg-white;
 }
 
-:deep .gray-row {
+:deep .ma-gray-row {
   @apply bg-gray-100;
 }
 

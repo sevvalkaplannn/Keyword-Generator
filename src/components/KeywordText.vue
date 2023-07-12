@@ -1,35 +1,25 @@
 <template>
-  <div>
-    <a-form :form="form" @submit="submitForm" class="mb-4">
+  <div class="ma-text-area">
+    <a-form :form="form" @submit="submitForm">
       <a-form-item>
         <a-textarea v-model="userInput" placeholder="Enter text" />
       </a-form-item>
-      <a-form-item>
-        <a-row>
-          <a-col :span="18">
-            <a-button type="primary" html-type="submit" class="ma-convert-button"
-              >Count</a-button
-            >
-          </a-col>
-          <a-col :span="6">
-            <span class="ma-character-counter"
-              >Total Characters: {{ userInput.length }}</span
-            >
-          </a-col>
-        </a-row>
-      </a-form-item>
+      <div class="ma-bottom-items">
+        <a-button type="primary" html-type="submit" class="ma-convert-button"
+          >Count</a-button
+        >
+        <span class="ma-character-counter">Total Characters: {{ userInput.length }}</span>
+      </div>
     </a-form>
   </div>
 </template>
 
 <script>
-import { Form, Input, Button, Row, Col } from "ant-design-vue";
+import { Form, Input, Button } from "ant-design-vue";
 
 export default {
   name: "ma-keyword-text",
   components: {
-    "a-row": Row,
-    "a-col": Col,
     "a-form": Form,
     "a-form-item": Form.Item,
     "a-textarea": Input.TextArea,
@@ -60,16 +50,13 @@ export default {
   methods: {
     submitForm(event) {
       event.preventDefault();
-      if(this.characterCount>1){
+      if (this.characterCount > 1) {
         this.$emit("update-text", this.userInput);
+      } else if (this.characterCount == 1) {
+        alert("Please write a word!");
+      } else {
+        alert("Please write your text! The textbox is empty!");
       }
-      else if(this.characterCount==1){
-        alert("Please write a word!")
-      }
-      else{
-        alert("Please write your text! The textbox is empty!")
-      }
-      
     },
   },
 };
@@ -77,15 +64,22 @@ export default {
 
 <style scoped>
 .ma-convert-button {
-  @apply absolute left-4 lg:left-20 lg:relative bg-yellow-500 border-yellow-500 text-white rounded-lg lg:h-8 md:absolute md:left-10 sm:left-10;
+  @apply bg-yellow-500 border-yellow-500 text-white rounded-lg;
 }
 :deep .ant-btn-primary:hover {
   @apply bg-yellow-400 border-yellow-400;
 }
 :deep textarea.ant-input {
-  @apply w-96 left-24 lg:relative lg:h-56 lg:min-h-0 lg:w-10/12 lg:left-20 md:left-8 md:h-44 sm:left-8 h-44;
+  @apply lg:h-60;
 }
 .ma-character-counter {
-  @apply absolute left-28 lg:absolute text-sm text-gray-500 md:text-xs md:absolute md:left-3 sm:absolute sm:text-xs;
+  @apply text-gray-500;
+}
+.ma-bottom-items {
+  @apply flex justify-around;
+}
+
+.ma-text-area {
+  @apply lg:w-4/12;
 }
 </style>

@@ -168,7 +168,7 @@ export default {
   @apply bg-blue-700 text-white;
 }
 :deep .ant-btn-primary {
-  @apply bg-blue-700 border-blue-700 md:absolute md:bottom-4;
+  @apply bg-blue-700 border-blue-700;
 }
 :deep .ma-default-row {
   @apply bg-white;
@@ -179,6 +179,6 @@ export default {
 }
 
 .ma-table {
-  @apply absolute top-72 -left-full lg:w-11/12 sm:top-0 md:absolute md:w-9/12 md:left-14 sm:absolute sm:w-7/12 sm:left-16;
+  @apply w-full lg:w-4/12;
 }
 </style>

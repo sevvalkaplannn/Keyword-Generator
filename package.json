@@ -30,7 +30,9 @@
     "babel-eslint": "^10.1.0",
     "cache-loader": "^4.1.0",
     "core-js": "^3.6.5",
+    "cypress": "^12.17.1",
     "eslint": "^7.29.0",
+    "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-vue": "^7.11.1",
     "google-fonts-webpack-plugin": "^0.4.4",
     "postcss": "^8.4.5",
@@ -57,4 +59,5 @@
     },
     "rules": {}
   }
+  
 }

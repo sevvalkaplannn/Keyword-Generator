@@ -33,7 +33,12 @@ export default {
     "a-textarea": Input.TextArea,
     "a-button": Button,
   },
-  props: ["initialText"],
+  props: {
+    initialText: {
+      type: String,
+      required: true,
+    }
+  },
 
   data() {
     return {

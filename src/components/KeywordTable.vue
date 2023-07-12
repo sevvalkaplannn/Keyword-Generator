@@ -24,7 +24,12 @@ export default {
     "a-table": Table,
     "a-button": Button,
   },
-  props: ["text"],
+  props: {
+    text: {
+      type: String,
+      required: true,
+    }
+  },
   data() {
     return {
       columns: [

@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
 .ma-keyword-density-wrapper{
-  @apply flex flex-col lg:flex-row gap-y-6 lg:justify-evenly
+  @apply flex flex-col lg:flex-row gap-y-6 lg:justify-evenly  ;
 }
 
 </style>

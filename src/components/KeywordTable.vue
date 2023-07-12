@@ -133,8 +133,8 @@ export default {
               ? density
               : this.calculateDensity(parseInt(count), this.totalCount);
           keywordData.push({
-            key: keywords.join(" - "),
-            keyword: keywords.join(" - "),
+            key: keywords.join(" , "),
+            keyword: keywords.join(" , "),
             count: parseInt(count),
             density: densityValue,
           });

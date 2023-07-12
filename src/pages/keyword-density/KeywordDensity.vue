@@ -17,6 +17,7 @@ import KeywordText from "../../components/KeywordText.vue";
 import KeywordTable from "../../components/KeywordTable.vue";
 
 export default {
+  name: "ma-keyword-density",
   components: {
     "a-row": Row,
     "a-col": Col,

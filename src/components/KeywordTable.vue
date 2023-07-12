@@ -19,6 +19,7 @@ import { Button, Table } from "ant-design-vue";
 import { regex, splitRegex, filterArr } from "../pages/cleanupResources";
 
 export default {
+  name: "ma-keyword-table",
   components: {
     "a-table": Table,
     "a-button": Button,

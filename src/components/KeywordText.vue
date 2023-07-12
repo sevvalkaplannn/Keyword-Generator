@@ -24,6 +24,7 @@
 import { Form, Input, Button, Row, Col } from "ant-design-vue";
 
 export default {
+  name: "ma-keyword-text",
   components: {
     "a-row": Row,
     "a-col": Col,

@@ -9,7 +9,6 @@
       @click="copyToClipboard"
       type="primary"
       html-type="submit"
-      class="convertButton"
       >Copy to Clipboard</a-button
     >
   </div>

@@ -1,10 +1,10 @@
 <template>
   <div>
     <a-row>
-      <a-col :span="12" class="ma-left-side">
+      <a-col :span="12">
         <keyword-text :initialText="keywordText" @update-text="updateKeywordText" />
       </a-col>
-      <a-col :span="12" class="ma-right-side">
+      <a-col :span="12">
         <keyword-table :text="keywordText" />
       </a-col>
     </a-row>

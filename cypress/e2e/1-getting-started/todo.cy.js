@@ -7,7 +7,7 @@
 // the power of writing tests in Cypress.
 //
 // To learn more about how Cypress works and
-// what makes it such an awesome testing tool,
+// what makes it such an aw esome testing tool,
 // please read our getting started guide:
 // https://on.cypress.io/introduction-to-cypress
 
